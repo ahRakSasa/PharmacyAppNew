@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "399377941656",
+    "firebase_url": "https://ourpharmacy-983a3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ourpharmacy-983a3",
+    "storage_bucket": "ourpharmacy-983a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399377941656:android:136359699224ff57143ced",
+        "android_client_info": {
+          "package_name": "com.example.pharmacy_appnew_version"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399377941656-fjemv7acv0f7bor5r285eapbs3qo1q8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNm7UHHLU8uvYi6VtP7gxT1pcGpzOmmHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399377941656-fjemv7acv0f7bor5r285eapbs3qo1q8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
