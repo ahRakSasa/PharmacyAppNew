@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
 import 'package:pharmacy_appnew_version/Screens/screens.dart';
+import 'package:pharmacy_appnew_version/auth/register_screen.dart';
 import 'package:pharmacy_appnew_version/blocs/Cart/cart_bloc.dart';
 import 'package:pharmacy_appnew_version/blocs/WishList/wishlist_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,8 +38,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenerateRoute,
         initialRoute: SplashScreen.routeName,
+        //home: RegisterScreen(),
       ),
     );
   }
 }
-

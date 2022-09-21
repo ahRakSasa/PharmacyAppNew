@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_appnew_version/Widgets/section_title.dart';
@@ -8,7 +9,7 @@ import '../../Widgets/widgets.dart';
 import '../../blocs/category/category_bloc.dart';
 import '../../model/model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
 
   static Route route() {
@@ -19,6 +20,31 @@ class HomeScreen extends StatelessWidget {
   }
 
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<String> docId = [];
+  final CollectionReference prod =
+      FirebaseFirestore.instance.collection('products');
+  // Future getDocId() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('products')
+  //       .get()
+  //       .then((value) => value.docs.forEach((element) {
+  //             print('DocID:${element.reference.id}');
+  //             docId.add(element.reference.id);
+  //           }));
+  // }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // getDocId();
+  }
 
   @override
   Widget build(BuildContext context) {

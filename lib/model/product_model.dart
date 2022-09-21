@@ -57,7 +57,7 @@ class Product extends Equatable {
         popular: true,
         //timestamp: Timestamp.now(),
         imageAsset:
-            "https://cdn.fishry.com/product/Centrum-Adults--130-Ct-3a68d89-my-vitamin-store.png"),
+            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
     Product(
         name: "Vitamin #1",
         price: 2.99,
@@ -68,7 +68,7 @@ class Product extends Equatable {
         popular: true,
         //timestamp: Timestamp.now(),
         imageAsset:
-            "https://cdn.fishry.com/product/Centrum-Adults--130-Ct-3a68d89-my-vitamin-store.png"),
+            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
     Product(
         name: "Vitamin #1",
         price: 2.99,
@@ -79,7 +79,7 @@ class Product extends Equatable {
         popular: true,
         //timestamp: Timestamp.now(),
         imageAsset:
-            "https://cdn.fishry.com/product/Centrum-Adults--130-Ct-3a68d89-my-vitamin-store.png"),
+            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
     Product(
         name: "Vitamin #1",
         price: 2.99,
@@ -90,7 +90,6 @@ class Product extends Equatable {
         popular: true,
         //timestamp: Timestamp.now(),
         imageAsset:
-            "https://cdn.fishry.com/product/Centrum-Adults--130-Ct-3a68d89-my-vitamin-store.png"),
-    
+            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
   ];
 }

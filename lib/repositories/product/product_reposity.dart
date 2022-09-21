@@ -8,16 +8,34 @@ class ProductRepository extends BaseProductRepository {
 
   ProductRepository({FirebaseFirestore? firebaseFirestore})
       : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+  List<Product> listProduct = [];
+  List<String> docId = [];
 
-  @override
-  Stream<List<Product>> getAllProducts() {
-    return _firebaseFirestore
+  Future getAllProducts() async {
+    await FirebaseFirestore.instance
         .collection('products')
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
-    });
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              print('DocId:${element.reference.id}');
+              docId.add(element.reference.id);
+            }));
   }
 
-  create({required String name, required String price}) {}
+  // @override
+  // Stream<List<Product>> getAllProducts() {
+  //   return _firebaseFirestore
+  //       .collection('products')
+  //       .snapshots()
+  //       .map((snapshot) {
+  //     //print(snapshot);
+  //     return snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
+  //   });
+  // }
+
+  // Future<void> main() async {
+  //   var myReadData = await getAllProducts();
+  //   print(myReadData);
+  // }
+
+  // create({required String name, required String price}) {}
 }
