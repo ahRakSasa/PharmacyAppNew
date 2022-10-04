@@ -1,13 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmacy_appnew_version/controller/banner/get_banner.dart';
+import 'package:pharmacy_appnew_version/controller/product/get_image_firebase_controller.dart';
 import 'package:pharmacy_appnew_version/model/model.dart';
 
 import '../../Widgets/widgets.dart';
 import '../../blocs/Cart/cart_bloc.dart';
 import '../../blocs/WishList/wishlist_bloc.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   static const String routeName = '/product';
 
   static Route route({required Product product}) {
@@ -22,57 +26,89 @@ class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key, required this.product}) : super(key: key);
 
   @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  List<String> docId = [];
+
+  getAllProducts() async {
+    await FirebaseFirestore.instance
+        .collection('product')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((element) {
+              print(element.reference);
+              docId.add(element.reference.id);
+            }));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllProducts();
+    print(docId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarPage(title: product.name),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
-        child: Container(
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.share,
-                  color: Colors.white,
-                ),
-              ),
-              BlocBuilder<WishlistBloc, WishlistState>(
-                builder: (context, state) {
-                  return IconButton(
-                    onPressed: () {
-                      context
-                          .read<WishlistBloc>()
-                          .add(AddProductToWishList(product));
-                      final snackBar =
-                          SnackBar(content: Text('Added to your WishList!'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
-                    icon: Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                    ),
-                  );
-                },
-              ),
-              BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                      onPressed: () {
-                        context.read<CartBloc>().add(AddProduct(product));
-                        Navigator.pushNamed(context, '/cart');
-                      },
-                      child: Text(
-                        'ADD TO CARD',
-                        style: Theme.of(context).textTheme.bodyText1!,
-                      ));
-                },
-              )
-            ],
+      appBar: CustomAppBarPage(title: widget.product.name),
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Colors.green,
+        buttonBackgroundColor: Colors.white,
+        backgroundColor: Colors.white,
+        items: [
+          InkWell(
+            child: const Icon(
+              Icons.share,
+              color: Colors.black,
+              size: 30,
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => OrderSummaryPage()));
+            },
           ),
-        ),
+          BlocBuilder<WishlistBloc, WishlistState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  context
+                      .read<WishlistBloc>()
+                      .add(AddProductToWishList(widget.product));
+                  final snackBar =
+                      SnackBar(content: Text('Added to your WishList!'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+              );
+            },
+          ),
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              return ElevatedButton(
+                  onPressed: () {
+                    context.read<CartBloc>().add(AddProduct(widget.product));
+                    Navigator.pushNamed(context, '/cart');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black, // Background color
+                    onPrimary: Colors.green, // Text Color (Foreground color)
+                  ),
+                  child: Text(
+                    'ADD TO CARD',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(color: Colors.white),
+                  ));
+            },
+          ),
+        ],
       ),
       body: ListView(
         children: [
@@ -83,9 +119,13 @@ class ProductScreen extends StatelessWidget {
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
                 enlargeCenterPage: true),
             items: [
-              HeroCarouselCart(
-                product: product,
-              ),
+              HeroCarouselCart(),
+              // ListView.builder(
+              //   itemCount: docId.length,
+              //   itemBuilder: (context, index) {
+              //     return GetImagePage(documentId: docId[index]);
+              //   },
+              // )
             ],
           ),
           Padding(
@@ -100,14 +140,14 @@ class ProductScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        product.name,
+                        widget.product.name,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2!
                             .copyWith(color: Colors.white),
                       ),
                       Text(
-                        '${product.price}',
+                        '${widget.product.price}',
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2!
@@ -130,7 +170,7 @@ class ProductScreen extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                    product.discription,
+                    widget.product.discription,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2!
@@ -151,7 +191,7 @@ class ProductScreen extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                    product.discription,
+                    widget.product.discription,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2!

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Product extends Equatable {
   final String imageAsset;
@@ -58,28 +61,7 @@ class Product extends Equatable {
         //timestamp: Timestamp.now(),
         imageAsset:
             "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
-    Product(
-        name: "Vitamin #1",
-        price: 2.99,
-        discription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        subCategory: '',
-        mainCategory: 'Vitamin',
-        popular: true,
-        //timestamp: Timestamp.now(),
-        imageAsset:
-            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
-    Product(
-        name: "Vitamin #1",
-        price: 2.99,
-        discription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        subCategory: '',
-        mainCategory: 'Vitamin',
-        popular: true,
-        //timestamp: Timestamp.now(),
-        imageAsset:
-            "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
+
     Product(
         name: "Vitamin #1",
         price: 2.99,
@@ -93,3 +75,5 @@ class Product extends Equatable {
             "http://cdn.shopify.com/s/files/1/0265/3034/9153/products/Shopbilder_VitaminStack_1200x1200.jpg?v=1633617809"),
   ];
 }
+
+

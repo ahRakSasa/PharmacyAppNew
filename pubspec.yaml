@@ -38,11 +38,13 @@ dependencies:
   equatable: ^2.0.5
   carousel_slider: ^4.1.1
   flutter_bloc: ^8.1.1
-  firebase_core: ^1.21.1
+  firebase_core: ^1.24.0
   intl_phone_field: ^3.1.0
   pin_code_fields: ^7.4.0
   google_fonts: ^3.0.1
   firebase_auth: ^3.9.0
+  cached_network_image: ^3.2.2
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

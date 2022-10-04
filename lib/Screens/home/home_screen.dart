@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_appnew_version/Widgets/section_title.dart';
+import 'package:pharmacy_appnew_version/controller/test_firebase/firebase_controller.dart';
+import 'package:pharmacy_appnew_version/controller/banner/get_banner.dart';
 import 'package:pharmacy_appnew_version/model/category_model.dart';
 
 import '../../Widgets/widgets.dart';
@@ -27,23 +29,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> docId = [];
-  final CollectionReference prod =
-      FirebaseFirestore.instance.collection('products');
-  // Future getDocId() async {
-  //   await FirebaseFirestore.instance
-  //       .collection('products')
-  //       .get()
-  //       .then((value) => value.docs.forEach((element) {
-  //             print('DocID:${element.reference.id}');
-  //             docId.add(element.reference.id);
-  //           }));
-  // }
+
+  getAllProducts() async {
+    await FirebaseFirestore.instance
+        .collection('banner')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((element) {
+              print(element.reference);
+              docId.add(element.reference.id);
+            }));
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // getDocId();
+    getAllProducts();
+    print(docId);
   }
 
   @override
@@ -73,6 +75,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           .map((category) =>
                               HeroCarouselCart(category: category))
                           .toList(),
+                      // items: [
+                      //   Container(
+                      //     width: 300,
+                      //     height: 70,
+                      //     child: ListView.builder(
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemCount: docId.length,
+                      //       itemBuilder: (context, index) {
+                      //         return GetBannerPage(bannerId: docId[index]);
+                      //       },
+                      //     ),
+                      //   )
+                      //],
+                      
                     );
                   } else {
                     return Text('Something went wrong!');
@@ -93,6 +109,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     docId = await FirebaseController().getAllProducts();
+      //   },
+      //   child: const Text('get'),
+      // ),
     );
   }
 }
