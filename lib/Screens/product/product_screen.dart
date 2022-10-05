@@ -3,27 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmacy_appnew_version/controller/banner/get_banner.dart';
-import 'package:pharmacy_appnew_version/controller/product/get_image_firebase_controller.dart';
-import 'package:pharmacy_appnew_version/model/model.dart';
+import 'package:pharmacy_appnew_version/Screens/product/popular_product_card.dart';
 
 import '../../Widgets/widgets.dart';
-import '../../blocs/Cart/cart_bloc.dart';
-import '../../blocs/WishList/wishlist_bloc.dart';
 
 class ProductScreen extends StatefulWidget {
-  static const String routeName = '/product';
-
-  static Route route({required Product product}) {
-    return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (_) => ProductScreen(product: product),
-    );
-  }
-
-  final Product product;
-
-  const ProductScreen({Key? key, required this.product}) : super(key: key);
+  const ProductScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -53,7 +40,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarPage(title: widget.product.name),
+      appBar: CustomAppBarPage(),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.green,
         buttonBackgroundColor: Colors.white,
@@ -66,48 +53,37 @@ class _ProductScreenState extends State<ProductScreen> {
               size: 30,
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OrderSummaryPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PopularProductCard()));
             },
           ),
-          BlocBuilder<WishlistBloc, WishlistState>(
-            builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  context
-                      .read<WishlistBloc>()
-                      .add(AddProductToWishList(widget.product));
-                  final snackBar =
-                      SnackBar(content: Text('Added to your WishList!'));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
-              );
+          IconButton(
+            onPressed: () {
+              final snackBar =
+                  SnackBar(content: Text('Added to your WishList!'));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
+            icon: const Icon(
+              Icons.favorite,
+              color: Colors.red,
+            ),
           ),
-          BlocBuilder<CartBloc, CartState>(
-            builder: (context, state) {
-              return ElevatedButton(
-                  onPressed: () {
-                    context.read<CartBloc>().add(AddProduct(widget.product));
-                    Navigator.pushNamed(context, '/cart');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black, // Background color
-                    onPrimary: Colors.green, // Text Color (Foreground color)
-                  ),
-                  child: Text(
-                    'ADD TO CARD',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: Colors.white),
-                  ));
-            },
-          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black, // Background color
+              onPrimary: Colors.green, // Text Color (Foreground color)
+            ),
+            child: Text(
+              'ADD TO CARD',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(color: Colors.white),
+            ),
+          )
         ],
       ),
       body: ListView(
@@ -139,20 +115,20 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        widget.product.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(color: Colors.white),
-                      ),
-                      Text(
-                        '${widget.product.price}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(color: Colors.white),
-                      )
+                      // Text(
+                      //   widget.product.name,
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .bodyText2!
+                      //       .copyWith(color: Colors.white),
+                      // ),
+                      // Text(
+                      //   '${widget.product.price}',
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .bodyText2!
+                      //       .copyWith(color: Colors.white),
+                      // )
                     ],
                   ),
                 )
@@ -169,14 +145,14 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
               children: [
                 ListTile(
-                  title: Text(
-                    widget.product.discription,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(color: Colors.black),
-                  ),
-                )
+                    // title: Text(
+                    //   widget.product.discription,
+                    //   style: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText2!
+                    //       .copyWith(color: Colors.black),
+                    // ),
+                    )
               ],
             ),
           ),
@@ -190,14 +166,14 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
               children: [
                 ListTile(
-                  title: Text(
-                    widget.product.discription,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(color: Colors.black),
-                  ),
-                )
+                    // title: Text(
+                    //   widget.product.discription,
+                    //   style: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText2!
+                    //       .copyWith(color: Colors.black),
+                    // ),
+                    )
               ],
             ),
           )
