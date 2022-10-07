@@ -21,7 +21,10 @@ class _BranchPageState extends State<BranchPage> {
       width: 300,
       child: Scaffold(
           appBar: AppBar(
-            title: const Center(child: Text('សាខា')),
+            backgroundColor: Colors.green,
+            title: const Center(
+              child: Text('សាខា'),
+            ),
           ),
           body: StreamBuilder(
             stream: _branches.snapshots(),

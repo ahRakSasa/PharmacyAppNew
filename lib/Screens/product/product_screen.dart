@@ -8,34 +8,15 @@ import 'package:pharmacy_appnew_version/Screens/product/popular_product_card.dar
 import '../../Widgets/widgets.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({
-    Key? key,
-  }) : super(key: key);
+  const ProductScreen();
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  List<String> docId = [];
-
-  getAllProducts() async {
-    await FirebaseFirestore.instance
-        .collection('product')
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((element) {
-              print(element.reference);
-              docId.add(element.reference.id);
-            }));
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getAllProducts();
-    print(docId);
-  }
+  final CollectionReference _products =
+      FirebaseFirestore.instance.collection('products');
 
   @override
   Widget build(BuildContext context) {
@@ -86,98 +67,163 @@ class _ProductScreenState extends State<ProductScreen> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          CarouselSlider(
-            options: CarouselOptions(
-                aspectRatio: 1.5,
-                viewportFraction: 0.9,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-                enlargeCenterPage: true),
-            items: [
-              HeroCarouselCart(),
-              // ListView.builder(
-              //   itemCount: docId.length,
-              //   itemBuilder: (context, index) {
-              //     return GetImagePage(documentId: docId[index]);
-              //   },
-              // )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 60,
-                  color: Colors.black.withAlpha(50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Text(
-                      //   widget.product.name,
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .bodyText2!
-                      //       .copyWith(color: Colors.white),
-                      // ),
-                      // Text(
-                      //   '${widget.product.price}',
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .bodyText2!
-                      //       .copyWith(color: Colors.white),
-                      // )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ExpansionTile(
-              initiallyExpanded: true,
-              title: Text(
-                'Product Information',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              children: [
-                ListTile(
-                    // title: Text(
-                    //   widget.product.discription,
-                    //   style: Theme.of(context)
-                    //       .textTheme
-                    //       .bodyText2!
-                    //       .copyWith(color: Colors.black),
-                    // ),
-                    )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ExpansionTile(
-              initiallyExpanded: true,
-              title: Text(
-                'Delivery Address',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              children: [
-                ListTile(
-                    // title: Text(
-                    //   widget.product.discription,
-                    //   style: Theme.of(context)
-                    //       .textTheme
-                    //       .bodyText2!
-                    //       .copyWith(color: Colors.black),
-                    // ),
-                    )
-              ],
-            ),
-          )
-        ],
+      body: SizedBox(
+        height: 600,
+        child: StreamBuilder(
+            stream: _products.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (streamSnapshot.hasData) {
+                return ListView.builder(
+                  itemCount: streamSnapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final DocumentSnapshot documentSnapshot =
+                        streamSnapshot.data!.docs[index];
+                    return Column(
+                      children: [
+                        // CarouselSlider.builder(
+                        //   itemCount: streamSnapshot.data!.docs.length,
+                        //   itemBuilder: (context, index, realIndex) {
+                        //     final DocumentSnapshot documentSnapshot =
+                        //         streamSnapshot.data!.docs[index];
+                        //     return ClipRRect(
+                        //       borderRadius:
+                        //           BorderRadius.all(Radius.circular(5.0)),
+                        //       child: Stack(
+                        //         children: <Widget>[
+                        //           Image.network(
+                        //               documentSnapshot['imageAsset'][0]['url']
+                        //                   .toString(),
+                        //               fit: BoxFit.cover,
+                        //               width: 300.0),
+                        //           Positioned(
+                        //             bottom: 0.0,
+                        //             left: 0.0,
+                        //             right: 0.0,
+                        //             child: Container(
+                        //               decoration: BoxDecoration(
+                        //                 gradient: LinearGradient(
+                        //                   colors: [
+                        //                     Color.fromARGB(200, 0, 0, 0),
+                        //                     Color.fromARGB(0, 0, 0, 0)
+                        //                   ],
+                        //                   begin: Alignment.bottomCenter,
+                        //                   end: Alignment.topCenter,
+                        //                 ),
+                        //               ),
+                        //               padding: EdgeInsets.symmetric(
+                        //                   vertical: 10.0, horizontal: 10.0),
+                        //               child: Text(
+                        //                 documentSnapshot['title'],
+                        //                 style: Theme.of(context)
+                        //                     .textTheme
+                        //                     .headline6!
+                        //                     .copyWith(color: Colors.white),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     );
+                        //   },
+                        //   options: CarouselOptions(
+                        //     height: 400,
+                        //     aspectRatio: 16 / 9,
+                        //     viewportFraction: 0.8,
+                        //     initialPage: 0,
+                        //     enableInfiniteScroll: true,
+                        //     reverse: false,
+                        //     autoPlay: true,
+                        //     autoPlayInterval: Duration(seconds: 3),
+                        //     autoPlayAnimationDuration:
+                        //         Duration(milliseconds: 800),
+                        //     autoPlayCurve: Curves.fastOutSlowIn,
+                        //     enlargeCenterPage: true,
+                        //     scrollDirection: Axis.horizontal,
+                        //   ),
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 60,
+                                color: Colors.black.withAlpha(50),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      documentSnapshot.id[index],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    Text(
+                                      documentSnapshot['price'].toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2!
+                                          .copyWith(color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: ExpansionTile(
+                            initiallyExpanded: true,
+                            title: Text(
+                              'Product Information',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            children: [
+                              ListTile(
+                                  // title: Text(
+                                  //   widget.product.discription,
+                                  //   style: Theme.of(context)
+                                  //       .textTheme
+                                  //       .bodyText2!
+                                  //       .copyWith(color: Colors.black),
+                                  // ),
+                                  )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: ExpansionTile(
+                            initiallyExpanded: true,
+                            title: Text(
+                              'Delivery Address',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            children: [
+                              ListTile(
+                                  // title: Text(
+                                  //   widget.product.discription,
+                                  //   style: Theme.of(context)
+                                  //       .textTheme
+                                  //       .bodyText2!
+                                  //       .copyWith(color: Colors.black),
+                                  // ),
+                                  )
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }),
       ),
     );
   }

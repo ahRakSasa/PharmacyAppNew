@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmacy_appnew_version/Screens/product/product_screen.dart';
 
 class PopularProductCard extends StatefulWidget {
   final double widthFactor;
@@ -28,6 +29,13 @@ class _PopularProductCardState extends State<PopularProductCard> {
     final double widthValue =
         MediaQuery.of(context).size.width / widget.widthFactor;
     return InkWell(
+      onTap: () {
+        // Navigator.push(context, MaterialPageRoute(
+        //   builder: (context) {
+            
+        //   },
+        // ));
+      },
       child: SizedBox(
         height: 180,
         child: StreamBuilder(
