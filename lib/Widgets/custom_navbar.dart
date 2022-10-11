@@ -1,9 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:pharmacy_appnew_version/Screens/place/branches.dart';
-import 'package:pharmacy_appnew_version/Screens/product/popular_product_card.dart';
-import 'package:pharmacy_appnew_version/Screens/product/product_screen.dart';
 
 class CustomNavigationBarPage extends StatefulWidget {
   const CustomNavigationBarPage({
@@ -29,22 +27,22 @@ class _CustomNavigationBarPageState extends State<CustomNavigationBarPage> {
       InkWell(
         child: const Icon(Icons.person, size: 30),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PopularProductCard()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BranchPage()));
         },
       ),
       InkWell(
         child: const Icon(Icons.settings, size: 30),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PopularProductCard()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BranchPage()));
         },
       ),
       InkWell(
         child: const Icon(Icons.home, size: 30),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PopularProductCard()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => BranchPage()));
         },
       ),
       InkWell(
@@ -60,7 +58,7 @@ class _CustomNavigationBarPageState extends State<CustomNavigationBarPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PopularProductCard(),
+              builder: (context) => BranchPage(),
             ),
           );
         },

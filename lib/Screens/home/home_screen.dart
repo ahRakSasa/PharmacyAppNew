@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmacy_appnew_version/Screens/product/popular_product_card.dart';
+
+import 'package:pharmacy_appnew_version/Screens/product/popular_calling.dart';
+import 'package:pharmacy_appnew_version/Screens/product/popular_product_mainpage.dart';
+import 'package:pharmacy_appnew_version/Screens/product/simple_product_calling.dart';
+
 import 'package:pharmacy_appnew_version/Widgets/section_title.dart';
 
 import '../../Widgets/widgets.dart';
@@ -25,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(height: 200, child: HeroCarouselCart()),
             SectionTitle(title: 'ផលិតផលកុំពុងពេញនិយម'),
-            PopularProductCard(),
+            PopularProductCalling(),
             SectionTitle(title: 'ផលិតផលថែរក្សាសម្រស់'),
-            PopularProductCard(),
+            SimpleProductCalling(),
           ],
         ),
       ),
