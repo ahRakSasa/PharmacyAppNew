@@ -2,17 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
+import 'package:pharmacy_appnew_version/auth/otp/otp_auth.dart';
 
 import '../../Widgets/widgets.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     Timer(
-        Duration(seconds: 2),
+        Duration(seconds: 5),
         (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return HomeScreen();
+                return LoginWithPhone();
               },
             ))));
     return Scaffold(
