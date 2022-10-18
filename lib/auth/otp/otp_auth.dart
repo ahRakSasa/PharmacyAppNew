@@ -1,20 +1,19 @@
 import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
+import 'package:pharmacy_appnew_version/auth/test_otp/register.dart';
 
-class LoginWithPhone extends StatefulWidget {
-  const LoginWithPhone({Key? key}) : super(key: key);
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginWithPhoneState createState() => _LoginWithPhoneState();
+  _OtpScreenState createState() => _OtpScreenState();
 }
 
-class _LoginWithPhoneState extends State<LoginWithPhone> {
-  TextEditingController phoneController =
-      TextEditingController(text: "+85512345678");
+class _OtpScreenState extends State<OtpScreen> {
+  TextEditingController phoneController = TextEditingController(text: "+855");
   TextEditingController otpController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,7 +28,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
       appBar: AppBar(
         title: Text(
           "ចូលគណនីតាមទូរស័ព្ទ",
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: 20),
         ),
         backgroundColor: Colors.green,
       ),
@@ -66,20 +65,31 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
               height: 100,
             ),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 10),
-                    textStyle: const TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  if (otpVisibility) {
-                    verifyOTP();
-                  } else {
-                    loginWithPhone();
-                  }
-                },
-                child: Text(otpVisibility ? "បញ្ជាក់" : "ចូលគណនី")),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  textStyle: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                if (otpVisibility) {
+                  verifyOTP();
+                } else {
+                  loginWithPhone();
+                }
+              },
+              child: Text(otpVisibility ? "បញ្ជាក់" : "ចូលគណនី"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return RegisterScreen();
+                  },
+                ));
+              },
+              child: Text('Sign Out'),
+            ),
           ],
         ),
       ),

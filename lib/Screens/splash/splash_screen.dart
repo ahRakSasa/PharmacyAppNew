@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
         Duration(seconds: 5),
         (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return LoginWithPhone();
+                return OtpScreen();
               },
             ))));
     return Scaffold(
@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
         children: [
           Center(
             child: Image(
-              image: AssetImage('assets/images/logo.png'),
+              image: AssetImage('assets/images1/logo1.png'),
               width: double.infinity,
               height: 300,
             ),

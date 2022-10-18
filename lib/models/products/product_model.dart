@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 Products productFromJson(String str) => Products.fromJson(json.decode(str));
-
 String productsToJson(Products data) => json.encode(data.toJson());
 
 class Products {

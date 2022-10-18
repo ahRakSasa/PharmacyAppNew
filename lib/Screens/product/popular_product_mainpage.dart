@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_appnew_version/GetX/product/add_product.dart';
-
+import 'package:pharmacy_appnew_version/GetX/product/product_controller.dart';
+import 'package:pharmacy_appnew_version/cart/cart.dart';
 import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 
 import '../detail/detail.dart';

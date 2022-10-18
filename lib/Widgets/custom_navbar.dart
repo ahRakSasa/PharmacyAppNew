@@ -1,7 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
 
 import 'package:pharmacy_appnew_version/Screens/place/branches.dart';
+import 'package:pharmacy_appnew_version/cart/cart.dart';
+import 'package:pharmacy_appnew_version/setting/About_Us/home_screen_about.dart';
+import 'package:pharmacy_appnew_version/setting/setting_screen.dart';
 
 class CustomNavigationBarPage extends StatefulWidget {
   const CustomNavigationBarPage({
@@ -25,31 +29,31 @@ class _CustomNavigationBarPageState extends State<CustomNavigationBarPage> {
   CurvedNavigationBar _buildBottomNavigationBar() {
     final items = <Widget>[
       InkWell(
-        child: const Icon(Icons.person, size: 30),
+        child: const Icon(Icons.info, size: 30),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BranchPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AboutUsHomePage()));
         },
       ),
       InkWell(
         child: const Icon(Icons.settings, size: 30),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BranchPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SettingScreen()));
         },
       ),
       InkWell(
         child: const Icon(Icons.home, size: 30),
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BranchPage()));
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },
       ),
       InkWell(
         child: const Icon(Icons.place, size: 30),
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => BranchPage()));
+              context, MaterialPageRoute(builder: (context) => BranchScreen()));
         },
       ),
       InkWell(
@@ -58,7 +62,7 @@ class _CustomNavigationBarPageState extends State<CustomNavigationBarPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BranchPage(),
+              builder: (context) => MyCart(),
             ),
           );
         },
