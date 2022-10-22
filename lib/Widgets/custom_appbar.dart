@@ -18,19 +18,24 @@ class _CustomAppBarPageState extends State<CustomAppBarPage> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.white,
       elevation: 0,
-      title: Container(
-        //color: Colors.black,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Text(
-          'Our Pharmacy',
-          style: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(color: Colors.white),
-        ),
+      title: Image(
+        image: AssetImage('assets/images1/company_logo.png'),
+        height: 100,
+        width: 200,
       ),
+      // title: Container(
+      //   //color: Colors.black,
+      //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      //   child: Text(
+      //     'Our Pharmacy',
+      //     style: Theme.of(context)
+      //         .textTheme
+      //         .headline5!
+      //         .copyWith(color: Colors.white),
+      //   ),
+      // ),
       iconTheme: IconThemeData(color: Colors.white),
       actions: [
         IconButton(

@@ -155,7 +155,7 @@ class _SimpleProductPageState extends State<SimpleProductPage> {
                                 width: 40,
                               ),
                               Icon(
-                                Icons.add_circle,
+                                Icons.shopping_cart_checkout_outlined,
                                 color: Colors.white,
                               )
                             ],

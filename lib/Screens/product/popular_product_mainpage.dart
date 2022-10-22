@@ -166,7 +166,7 @@ class _PopularProductPageState extends State<PopularProductPage> {
                                         .addProducts(product);
                                   },
                                   icon: Icon(
-                                    Icons.add_circle,
+                                    Icons.shopping_cart_checkout_outlined,
                                     color: Colors.white,
                                   ))
                             ],

@@ -18,12 +18,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       appBar: CustomAppBarPage(),
       bottomNavigationBar: CustomNavigationBarPage(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 200, child: HeroCarouselCart()),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(height: 150, child: HeroCarouselCart()),
+            SizedBox(
+              height: 20,
+            ),
             SectionTitle(title: 'ផលិតផលកុំពុងពេញនិយម'),
             PopularProductPage(),
             SectionTitle(title: 'ផលិតផលថែរក្សាសម្រស់'),

@@ -43,6 +43,7 @@ class _HeroCarouselCartState extends State<HeroCarouselCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       body: CarouselSlider.builder(
         itemCount: docsId.length,
         itemBuilder: (context, index, realIndex) {
