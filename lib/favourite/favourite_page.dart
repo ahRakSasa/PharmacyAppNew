@@ -1,32 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_appnew_version/GetX/product/counter_product.dart';
-import 'package:pharmacy_appnew_version/GetX/product/product_controller.dart';
 import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 import 'package:pharmacy_appnew_version/models/user/products_order_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../GetX/favourite/favourite_controller.dart';
 import '../Widgets/custom_navbar.dart';
 
-class MyCart extends StatefulWidget {
-  const MyCart({super.key});
+class FavouritePage extends StatefulWidget {
+  const FavouritePage({super.key});
 
   @override
-  State<MyCart> createState() => _MyCartState();
+  State<FavouritePage> createState() => _FavouritePageState();
 }
 
-class _MyCartState extends State<MyCart> {
-  AddedProductController productController = Get.put(AddedProductController());
+class _FavouritePageState extends State<FavouritePage> {
+  AddedFavouriteProductController productController =
+      Get.put(AddedFavouriteProductController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('កន្ត្រក'),
+        title: const Text('ចូលចិត្ត'),
         backgroundColor: Colors.green,
       ),
-      bottomNavigationBar: CustomNavigationBarPage(),
-      body: GetBuilder<AddedProductController>(builder: (value) {
+      //bottomNavigationBar: CustomNavigationBarPage(),
+      body: GetBuilder<AddedFavouriteProductController>(builder: (value) {
         return SizedBox(
           height: 600,
           child: Column(
@@ -52,23 +52,11 @@ class _MyCartState extends State<MyCart> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.add_circle,
-                                    color: Colors.green,
-                                  )),
-                              Obx((() => Text('${productController.qty}'))),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.remove_circle,
-                                    color: Colors.green,
-                                  )),
-                              IconButton(
                                   onPressed: () {
-                                    productController.removeProductController(
-                                        productController
-                                            .listProducts[index].name);
+                                    productController
+                                        .removeFavouriteProductController(
+                                            productController
+                                                .listProducts[index].name);
                                   },
                                   icon: const Icon(
                                     Icons.delete,
@@ -82,20 +70,6 @@ class _MyCartState extends State<MyCart> {
                   },
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.black, // Background color
-                  onPrimary: Colors.green, // Text Color (Foreground color)
-                ),
-                child: Text(
-                  'ធ្វើការកម្មង',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.white),
-                ),
-              )
             ],
           ),
         );

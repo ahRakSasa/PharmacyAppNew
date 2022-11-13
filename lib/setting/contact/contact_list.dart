@@ -13,9 +13,17 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 226, 226, 226),
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: Text('សេវ៉ាកម្មទំនាក់ទំនង'),
+          backgroundColor: Colors.white,
+          title: Text(
+            'សេវ៉ាកម្មទំនាក់ទំនង',
+            style: TextStyle(color: Colors.green),
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.green,
+            size: 30,
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
@@ -25,8 +33,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://o.remove.bg/downloads/420b7281-81d7-40d2-9303-58ac75ca05e6/image-removebg-preview.png'),
+                    backgroundImage: AssetImage('assets/images1/boss1.jpgss'),
                   ),
                   title: Text("Phone Number"),
                   subtitle: Text('089990000'),
@@ -65,8 +72,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://o.remove.bg/downloads/18ac6f78-86d4-4340-bc3b-88f04aae6f63/image-removebg-preview.png'),
+                    backgroundImage: AssetImage('assets/images1/boss1.jpgss'),
                   ),
                   title: Text("Email"),
                   subtitle: Text('sorsampisith@gmail.com'),

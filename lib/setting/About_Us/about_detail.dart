@@ -37,30 +37,15 @@ class AboutUsDetailPage extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          'Solar System',
-                          style: TextStyle(
-                            fontFamily: 'Avenir',
-                            fontSize: 31,
-                            color: primaryTextColor,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                        Divider(color: Colors.black38),
-                        SizedBox(height: 32),
-                        Text(
                           planetInfo.description ?? '',
-                          maxLines: 5,
-                          overflow: TextOverflow.ellipsis,
+                          // maxLines: 5,
+                          // overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontFamily: 'Avenir',
                             fontSize: 20,
                             color: contentTextColor,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 32),
-                        Divider(color: Colors.black38),
                       ],
                     ),
                   ),
@@ -91,7 +76,7 @@ class AboutUsDetailPage extends StatelessWidget {
                             ),
                             child: AspectRatio(
                               aspectRatio: 1,
-                              child: Image.network(
+                              child: Image.asset(
                                 planetInfo.images[index],
                                 fit: BoxFit.contain,
                               ),
@@ -109,7 +94,7 @@ class AboutUsDetailPage extends StatelessWidget {
                   child: Container(
                       height: 300,
                       width: 500,
-                      child: Image.network(planetInfo.iconImage))),
+                      child: Image.asset(planetInfo.iconImage))),
             ),
             Positioned(
               top: 60,

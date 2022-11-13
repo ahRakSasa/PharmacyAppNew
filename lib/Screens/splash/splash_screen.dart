@@ -1,13 +1,31 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
-import 'package:pharmacy_appnew_version/auth/otp/otp_auth.dart';
+import 'package:pharmacy_appnew_version/auth/otp/register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Widgets/widgets.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  String token = "";
+  Future<void> checkUser() async {
+    var prefs = await SharedPreferences.getInstance();
+    token = prefs.getString("userToken")!;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +33,7 @@ class SplashScreen extends StatelessWidget {
         Duration(seconds: 5),
         (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return OtpScreen();
+                return token == "" ? RegisterScreen() : HomeScreen();
               },
             ))));
     return Scaffold(

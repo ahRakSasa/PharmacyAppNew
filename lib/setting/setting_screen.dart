@@ -1,10 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
-import 'package:pharmacy_appnew_version/auth/otp/otp_auth.dart';
+import 'package:pharmacy_appnew_version/Screens/partner/partner.dart';
+import 'package:pharmacy_appnew_version/auth/otp/register.dart';
+import 'package:pharmacy_appnew_version/profile/edit_acc.dart';
 import 'package:pharmacy_appnew_version/setting/About_Us/home_screen_about.dart';
 import 'package:pharmacy_appnew_version/setting/contact/contact_list.dart';
-import 'package:pharmacy_appnew_version/setting/edit_person/person_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../Widgets/custom_navbar.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -13,14 +19,28 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
+Future clearPrefer() async {
+  var prefs = await SharedPreferences.getInstance();
+  return prefs.remove("userToken");
+}
+
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('ការកំណត់'),
+        backgroundColor: Colors.white,
+        title: Text(
+          'ការកំណត់',
+          style: TextStyle(color: Colors.green),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.green,
+          size: 30,
+        ),
       ),
+      //bottomNavigationBar: CustomNavigationBarPage(),
       body: SingleChildScrollView(
         child: Container(
           color: Color.fromARGB(255, 245, 245, 245),
@@ -57,7 +77,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return PersonScreenPage();
+                              return ProfilePage();
                             },
                           ));
                         },
@@ -76,7 +96,10 @@ class _SettingScreenState extends State<SettingScreen> {
                                   size: 50,
                                   color: Colors.green,
                                 ),
-                                Text('Edit Account')
+                                Text(
+                                  'កែប្រែគណនី',
+                                  style: TextStyle(fontSize: 20),
+                                )
                               ],
                             ),
                           ),
@@ -105,29 +128,12 @@ class _SettingScreenState extends State<SettingScreen> {
                                   color: Colors.green,
                                   size: 50,
                                 ),
-                                Text('Contact')
+                                Text(
+                                  'ទំនាក់ទំនង',
+                                  style: TextStyle(fontSize: 20),
+                                )
                               ],
                             ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.green, width: 2),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.place_outlined,
-                                color: Colors.green,
-                                size: 50,
-                              ),
-                              Text('Edit Address')
-                            ],
                           ),
                         ),
                       ),
@@ -135,7 +141,40 @@ class _SettingScreenState extends State<SettingScreen> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return OtpScreen();
+                              return PartnerShipPage();
+                            },
+                          ));
+                        },
+                        child: Container(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Colors.green, width: 2),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.place_outlined,
+                                  color: Colors.green,
+                                  size: 50,
+                                ),
+                                Text(
+                                  'ដៃគូរសហការណ៍',
+                                  style: TextStyle(fontSize: 20),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          clearPrefer();
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return RegisterScreen();
                             },
                           ));
                         },
@@ -154,7 +193,10 @@ class _SettingScreenState extends State<SettingScreen> {
                                   color: Colors.green,
                                   size: 50,
                                 ),
-                                Text('Log Out')
+                                Text(
+                                  'ចាកចេញ',
+                                  style: TextStyle(fontSize: 20),
+                                )
                               ],
                             ),
                           ),

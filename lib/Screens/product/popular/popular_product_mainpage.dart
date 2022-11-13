@@ -1,17 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmacy_appnew_version/Screens/detail/detail.dart';
+import 'package:get/get.dart';
+import 'package:pharmacy_appnew_version/GetX/favourite/favourite_controller.dart';
+import 'package:pharmacy_appnew_version/GetX/product/product_controller.dart';
+import 'package:pharmacy_appnew_version/cart/cart.dart';
 import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 
-class SimpleProductPage extends StatefulWidget {
-  const SimpleProductPage({Key? key}) : super(key: key);
+import '../../detail/detail.dart';
+
+class PopularProductPage extends StatefulWidget {
+  final addProductController = Get.put(AddedProductController());
+  final addFavouriteProductController =
+      Get.put(AddedFavouriteProductController());
+  PopularProductPage({Key? key}) : super(key: key);
 
   @override
-  State<SimpleProductPage> createState() => _SimpleProductPageState();
+  State<PopularProductPage> createState() => _PopularProductPageState();
 }
 
-class _SimpleProductPageState extends State<SimpleProductPage> {
+class _PopularProductPageState extends State<PopularProductPage> {
   List<String> docsId = [];
   Future<Products?> getProduct(String docId) async {
     final docProduct =
@@ -65,7 +73,6 @@ class _SimpleProductPageState extends State<SimpleProductPage> {
                   );
                 } else {
                   final dataProduct = snapshot.data!;
-
                   return dataProduct == null
                       ? const Center(
                           child: Text('No Products'),
@@ -79,14 +86,16 @@ class _SimpleProductPageState extends State<SimpleProductPage> {
   }
 
   Widget buildViewProduct({Products? product}) {
-    return product!.popular == false
+    return product!.popular == true
         ? InkWell(
             onTap: () async {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ProductDetailScreen(products: product);
+                    return ProductDetailScreen(
+                      products: product,
+                    );
                   },
                 ),
               );
@@ -152,11 +161,27 @@ class _SimpleProductPageState extends State<SimpleProductPage> {
                                 ],
                               ),
                               SizedBox(
-                                width: 40,
+                                width: 20,
                               ),
-                              Icon(
-                                Icons.shopping_cart_checkout_outlined,
-                                color: Colors.white,
+                              IconButton(
+                                onPressed: () {
+                                  widget.addProductController
+                                      .addProducts(product);
+                                },
+                                icon: Icon(
+                                  Icons.shopping_cart_checkout_outlined,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  widget.addFavouriteProductController
+                                      .addFavouriteProducts(product);
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                ),
                               )
                             ],
                           ),

@@ -9,29 +9,33 @@ Users usersFromJson(String str) => Users.fromJson(json.decode(str));
 String usersToJson(Users data) => json.encode(data.toJson());
 
 class Users {
-    Users({
-        required this.address,
-        required this.name,
-        required this.email,
-        required this.phoneNum,
-    });
+  Users({
+    required this.address,
+    required this.firstname,
+    required this.lastname,
+    required this.email,
+    required this.phoneNum,
+  });
 
-    String address;
-    String name;
-    String email;
-    String phoneNum;
+  String address;
+  String firstname;
+  String lastname;
+  String email;
+  String phoneNum;
 
-    factory Users.fromJson(Map<String, dynamic> json) => Users(
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
         address: json["address"],
-        name: json["name"],
+        firstname: json["firstname"],
+        lastname: json["lastname"],
         email: json["email"],
         phoneNum: json["phoneNum"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "address": address,
-        "name": name,
+        "firstname": firstname,
+        "lastname":lastname,
         "email": email,
         "phoneNum": phoneNum,
-    };
+      };
 }

@@ -93,7 +93,8 @@ class _HeroCarouselCartState extends State<HeroCarouselCart> {
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       child: Stack(
         children: <Widget>[
-          Image.network(banner!.imageAsset, fit: BoxFit.cover, width: 300.0),
+          Image.network(banner!.banner.first.imageAsset,
+              fit: BoxFit.cover, width: 300.0),
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -111,7 +112,7 @@ class _HeroCarouselCartState extends State<HeroCarouselCart> {
               ),
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: Text(
-                banner!.title,
+                banner!.banner.first.title,
                 style: Theme.of(context)
                     .textTheme
                     .headline6!

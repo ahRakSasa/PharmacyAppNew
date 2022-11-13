@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmacy_appnew_version/Screens/product/popular_product_mainpage.dart';
-import 'package:pharmacy_appnew_version/Screens/product/product_simple.dart';
+import 'package:pharmacy_appnew_version/Screens/product/list_productAll/list_product.dart';
+import 'package:pharmacy_appnew_version/Screens/product/medical/medical_product.dart';
+import 'package:pharmacy_appnew_version/Screens/product/popular/popular_product_mainpage.dart';
+import 'package:pharmacy_appnew_version/Screens/product/screen_product_simple.dart';
 import 'package:pharmacy_appnew_version/Widgets/section_title.dart';
 
 import '../../Widgets/widgets.dart';
@@ -31,10 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
-            SectionTitle(title: 'ផលិតផលកុំពុងពេញនិយម'),
+            SectionTitle(title: 'ផលិតផលរបស់យើង'),
+            ScreenSimpleProductPage(),
+            SectionTitle(title: 'ផលិតផលកំពុងពេញនិយម'),
             PopularProductPage(),
-            SectionTitle(title: 'ផលិតផលថែរក្សាសម្រស់'),
-            SimpleProductPage(),
+            SectionTitle(title: 'ផលិតផល'),
+            AllProductPage(),
           ],
         ),
       ),

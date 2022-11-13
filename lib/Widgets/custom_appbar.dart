@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy_appnew_version/favourite/favourite_page.dart';
 
 class CustomAppBarPage extends StatefulWidget with PreferredSizeWidget {
   const CustomAppBarPage({
@@ -25,21 +26,19 @@ class _CustomAppBarPageState extends State<CustomAppBarPage> {
         height: 100,
         width: 200,
       ),
-      // title: Container(
-      //   //color: Colors.black,
-      //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //   child: Text(
-      //     'Our Pharmacy',
-      //     style: Theme.of(context)
-      //         .textTheme
-      //         .headline5!
-      //         .copyWith(color: Colors.white),
-      //   ),
-      // ),
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: IconThemeData(
+        color: Colors.green,
+        size: 30,
+      ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return FavouritePage();
+                },
+              ));
+            },
             icon: Icon(
               Icons.favorite,
               color: Colors.red,

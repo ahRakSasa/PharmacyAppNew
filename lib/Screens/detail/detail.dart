@@ -19,6 +19,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       appBar: CustomAppBarPage(),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.green,
@@ -56,7 +57,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               onPrimary: Colors.green, // Text Color (Foreground color)
             ),
             child: Text(
-              'ADD TO CARD',
+              'បន្ថែមទៅកន្ត្រក',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1!
@@ -68,6 +69,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 15,
+            ),
             CarouselSlider.builder(
               itemCount: widget.products.imageAsset.length,
               itemBuilder: (context, index, realIndex) {

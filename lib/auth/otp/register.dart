@@ -1,39 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Screens/home/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   double screenHeight = 0;
   double screenWidth = 0;
   double bottom = 0;
-
   String otpPin = " ";
   String countryDial = "+855";
   String verID = " ";
-
   int screenState = 0;
+  bool isLoading = false;
 
-  Color blue = Color.fromARGB(255, 203, 203, 203);
+  Color green = Color(0xFF04B04F);
+
+  var dbref;
 
   Future<void> verifyPhone(String number) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: number,
       timeout: const Duration(seconds: 20),
-      verificationCompleted: (PhoneAuthCredential credential) {
+      verificationCompleted: (PhoneAuthCredential credential) async {
         showSnackBarText("Auth Completed!");
       },
       verificationFailed: (FirebaseAuthException e) {
@@ -53,6 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> verifyOTP() async {
+    var prefs = await SharedPreferences.getInstance();
     await FirebaseAuth.instance
         .signInWithCredential(
       PhoneAuthProvider.credential(
@@ -60,13 +67,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
         smsCode: otpPin,
       ),
     )
-        .whenComplete(() {
+        .then((value) async {
+      writeUser(
+          phoneController.text,
+          value.user!.uid.toString(),
+          addressController.text,
+          firstNameController.text,
+          lastNameController.text,
+          emailController.text
+          );
+      prefs.setString(
+        "userToken",
+        value.user!.uid.toString(),
+      );
+    }).whenComplete(() {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const HomeScreen(),
         ),
       );
     });
+  }
+
+  Future<bool> checkUser(uid) async {
+    print(uid);
+    var docRef = FirebaseFirestore.instance.doc("users/${uid}");
+    var docSnap = await docRef.get();
+    if (docSnap.exists) {
+      return false;
+    }
+    return true;
+  }
+
+  final functions = FirebaseFunctions.instance;
+  Future<void> writeUser(String phone, String uid, String address,
+      String firstname, String lastname, String email) async {
+    HttpsCallable callable = functions.httpsCallable('createUser');
+    final checkDoc = await checkUser(uid);
+    print(checkDoc);
+    if (checkDoc == true) {
+      try {
+        final resp = await callable.call(<String, dynamic>{
+          'address': address,
+          'phone': phone,
+          'email': email,
+          'firstname': firstname,
+          'lastname': lastname,
+          'uid': uid,
+        });
+        print("result: ${resp.data}");
+      } on FirebaseException catch (error) {
+        print("error:${error}");
+      }
+    } else {
+      print("doc already exits");
+    }
   }
 
   @override
@@ -83,10 +138,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return Future.value(false);
       },
       child: Scaffold(
-        backgroundColor: blue,
+        backgroundColor: green,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 30),
             child: SizedBox(
               height: screenHeight,
               width: screenWidth,
@@ -101,17 +156,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         "បង្កើតគណនីនៅទីនេះ",
                         style: GoogleFonts.montserrat(
                           color: Colors.white,
-                          fontSize: screenWidth / 20,
+                          fontSize: screenWidth / 12,
                         ),
                       ),
                       screenState == 0 ? stateRegister() : stateOTP(),
                       GestureDetector(
                         onTap: () {
                           if (screenState == 0) {
-                            if (usernameController.text.isEmpty) {
-                              showSnackBarText("Username is still empty!");
-                            } else if (phoneController.text.isEmpty) {
-                              showSnackBarText("Phone number is still empty!");
+                            if (phoneController.text.isEmpty) {
+                              showSnackBarText("សូមបំពេញលេខទូរស័ព្ទរបស់អ្នក");
                             } else {
                               verifyPhone(countryDial + phoneController.text);
                             }
@@ -123,22 +176,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           }
                         },
-                        child: Container(
-                          height: 50,
-                          width: screenWidth,
-                          margin: EdgeInsets.only(bottom: screenHeight / 12),
-                          decoration: BoxDecoration(
-                            color: blue,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "CONTINUE",
-                              style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5,
-                                fontSize: 18,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Container(
+                            height: 50,
+                            width: screenWidth,
+                            margin: EdgeInsets.only(bottom: screenHeight / 12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "ចូលគណនី",
+                                style: GoogleFonts.montserrat(
+                                  color: Color.fromARGB(255, 9, 206, 111),
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5,
+                                  fontSize: 30,
+                                ),
                               ),
                             ),
                           ),
@@ -167,83 +223,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 10,
+        ),
         Text(
-          "Username",
+          "លេខទូរស័ព្ទ",
           style: GoogleFonts.montserrat(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          controller: usernameController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-          ),
-        ),
-        Text(
-          "Address",
-          style: GoogleFonts.montserrat(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          controller: addressController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-          ),
-        ),
-        Text(
-          "Email",
-          style: GoogleFonts.montserrat(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        TextFormField(
-          controller: emailController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Text(
-          "Phone number",
-          style: GoogleFonts.montserrat(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
+        SizedBox(
+          height: 30,
         ),
         IntlPhoneField(
           controller: phoneController,
-          showCountryFlag: false,
-          showDropdownIcon: false,
+          // showCountryFlag: false,
+          // showDropdownIcon: false,
           initialValue: countryDial,
           onCountryChanged: (country) {
             setState(() {
@@ -251,8 +247,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             });
           },
           decoration: InputDecoration(
-            border: OutlineInputBorder(
+            labelText: '012345678',
+            labelStyle: TextStyle(color: Color.fromARGB(255, 213, 213, 213)),
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(width: 2, color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(width: 2, color: Colors.white),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -272,7 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "We just sent a code to ",
+                text: "លេខកូដបានផ្ញើរទៅកាន់ទូរស័ព្ទរបស់អ្នក",
                 style: GoogleFonts.montserrat(
                   color: Colors.black87,
                   fontSize: 18,
@@ -287,7 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               TextSpan(
-                text: "\nEnter the code here and we can continue!",
+                text: "\nសូមបញ្ចូលលេខកូដរបស់អ្នក",
                 style: GoogleFonts.montserrat(
                   color: Colors.black87,
                   fontSize: 12,
@@ -309,8 +312,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             print(otpPin);
           },
           pinTheme: PinTheme(
-            activeColor: blue,
-            selectedColor: blue,
+            activeColor: green,
+            selectedColor: green,
             inactiveColor: Colors.black26,
           ),
         ),
@@ -321,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Didn't receive the code? ",
+                text: "មិនទទួលបានលេខកូដ?",
                 style: GoogleFonts.montserrat(
                   color: Colors.black87,
                   fontSize: 12,
@@ -335,7 +338,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     });
                   },
                   child: Text(
-                    "Resend",
+                    "ផ្ញើរម្តងទៀត",
                     style: GoogleFonts.montserrat(
                       color: Colors.black87,
                       fontSize: 12,

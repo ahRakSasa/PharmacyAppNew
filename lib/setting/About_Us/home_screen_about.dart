@@ -16,6 +16,19 @@ class _AboutUsHomePageState extends State<AboutUsHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(
+          child: Text(
+            'អំពីយើង',
+            style: TextStyle(color: Colors.green),
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.green,
+          size: 30,
+        ),
+      ),
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(
@@ -42,28 +55,6 @@ class _AboutUsHomePageState extends State<AboutUsHomePage> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    // DropdownButton(
-                    //   items: [
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Solar System',
-                    //         style: TextStyle(
-                    //           fontFamily: 'Avenir',
-                    //           fontSize: 24,
-                    //           color: const Color(0x7cdbf1ff),
-                    //           fontWeight: FontWeight.w500,
-                    //         ),
-                    //         textAlign: TextAlign.left,
-                    //       ),
-                    //     ),
-                    //   ],
-                    //   onChanged: (value) {},
-                    //   icon: Padding(
-                    //     padding: const EdgeInsets.only(left: 16.0),
-                    //     child: Image.asset('assets/drop_down_icon.png'),
-                    //   ),
-                    //   underline: SizedBox(),
-                    // ),
                   ],
                 ),
               ),
@@ -118,17 +109,6 @@ class _AboutUsHomePageState extends State<AboutUsHomePage> {
                                         ),
                                         textAlign: TextAlign.left,
                                       ),
-                                      Text(
-                                        'Solar System',
-                                        style: TextStyle(
-                                          fontFamily: 'Avenir',
-                                          fontSize: 23,
-                                          color: primaryTextColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(height: 32),
                                       Row(
                                         children: <Widget>[
                                           Text(
@@ -155,7 +135,7 @@ class _AboutUsHomePageState extends State<AboutUsHomePage> {
                           ),
                           Hero(
                             tag: planets[index].position,
-                            child: Image.network(planets[index].iconImage),
+                            child: Image.asset(planets[index].iconImage),
                           ),
                           Positioned(
                             right: 24,
@@ -181,32 +161,6 @@ class _AboutUsHomePageState extends State<AboutUsHomePage> {
           ),
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.vertical(
-      //       top: Radius.circular(36.0),
-      //     ),
-      //     color: navigationColor,
-      //   ),
-      //   padding: const EdgeInsets.all(24),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     children: <Widget>[
-      //       IconButton(
-      //         icon: Icon(Icons.menu),
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         icon: Icon(Icons.search_rounded),
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         icon: Icon(Icons.person),
-      //         onPressed: () {},
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

@@ -1,22 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pharmacy_appnew_version/GetX/product/product_controller.dart';
-import 'package:pharmacy_appnew_version/cart/cart.dart';
+import 'package:pharmacy_appnew_version/Screens/detail/detail.dart';
 import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 
-import '../detail/detail.dart';
-
-class PopularProductPage extends StatefulWidget {
-  final addProductController = Get.put(AddedProductController());
-  PopularProductPage({Key? key}) : super(key: key);
+class HelloProducts extends StatefulWidget {
+  const HelloProducts({Key? key}) : super(key: key);
 
   @override
-  State<PopularProductPage> createState() => _PopularProductPageState();
+  State<HelloProducts> createState() => _HelloProductsState();
 }
 
-class _PopularProductPageState extends State<PopularProductPage> {
+class _HelloProductsState extends State<HelloProducts> {
   List<String> docsId = [];
   Future<Products?> getProduct(String docId) async {
     final docProduct =
@@ -48,51 +43,64 @@ class _PopularProductPageState extends State<PopularProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 200,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: docsId.length,
-          itemBuilder: (context, index) {
-            return FutureBuilder(
-              future: getProduct(docsId[index]),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('wrong'),
-                  );
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return const Center(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  final dataProduct = snapshot.data!;
-                  return dataProduct == null
-                      ? const Center(
-                          child: Text('No Products'),
-                        )
-                      : buildViewProduct(product: dataProduct as Products);
-                }
-              },
-            );
-          },
-        ));
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(
+          child: Text(
+            'Medical',
+            style: TextStyle(color: Colors.green),
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.green,
+          size: 30,
+        ),
+      ),
+      body: GridView.builder(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: docsId.length,
+        itemBuilder: (context, index) {
+          return FutureBuilder(
+            future: getProduct(docsId[index]),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Center(
+                  child: Text('wrong'),
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else {
+                final dataProduct = snapshot.data!;
+
+                return dataProduct == null
+                    ? const Center(
+                        child: Text('No Products'),
+                      )
+                    : buildViewProduct(product: dataProduct as Products);
+              }
+            },
+          );
+        },
+      ),
+    );
   }
 
   Widget buildViewProduct({Products? product}) {
-    return product!.popular == true
+    return product!.mainCategory == "Hello"
         ? InkWell(
             onTap: () async {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ProductDetailScreen(
-                      products: product,
-                    );
+                    return ProductDetailScreen(products: product);
                   },
                 ),
               );
@@ -160,15 +168,10 @@ class _PopularProductPageState extends State<PopularProductPage> {
                               SizedBox(
                                 width: 40,
                               ),
-                              IconButton(
-                                  onPressed: () {
-                                    widget.addProductController
-                                        .addProducts(product);
-                                  },
-                                  icon: Icon(
-                                    Icons.shopping_cart_checkout_outlined,
-                                    color: Colors.white,
-                                  ))
+                              Icon(
+                                Icons.shopping_cart_checkout_outlined,
+                                color: Colors.white,
+                              )
                             ],
                           ),
                         ))
