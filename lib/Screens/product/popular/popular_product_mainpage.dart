@@ -52,37 +52,37 @@ class _PopularProductPageState extends State<PopularProductPage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 200,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: docsId.length,
-          itemBuilder: (context, index) {
-            return FutureBuilder(
-              future: getProduct(docsId[index]),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('wrong'),
-                  );
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return const Center(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  final dataProduct = snapshot.data!;
-                  return dataProduct == null
-                      ? const Center(
-                          child: Text('No Products'),
-                        )
-                      : buildViewProduct(product: dataProduct as Products);
-                }
-              },
-            );
-          },
-        ));
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: docsId.length,
+        itemBuilder: (context, index) {
+          return FutureBuilder(
+            future: getProduct(docsId[index]),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Center(
+                  child: Text('wrong'),
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else {
+                final dataProduct = snapshot.data!;
+                return dataProduct == null
+                    ? const Center(
+                        child: Text('No Products'),
+                      )
+                    : buildViewProduct(product: dataProduct as Products);
+              }
+            },
+          );
+        },
+      ),
+    );
   }
 
   Widget buildViewProduct({Products? product}) {

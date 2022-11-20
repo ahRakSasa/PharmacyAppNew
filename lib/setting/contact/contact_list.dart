@@ -15,13 +15,13 @@ class _ContactListPageState extends State<ContactListPage> {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 226, 226, 226),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green,
           title: Text(
             'សេវ៉ាកម្មទំនាក់ទំនង',
-            style: TextStyle(color: Colors.green),
+            style: TextStyle(color: Colors.white),
           ),
           iconTheme: IconThemeData(
-            color: Colors.green,
+            color: Colors.white,
             size: 30,
           ),
         ),
@@ -33,7 +33,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: AssetImage('assets/images1/boss1.jpgss'),
+                    backgroundImage: AssetImage('assets/images1/boss1.jpg'),
                   ),
                   title: Text("Phone Number"),
                   subtitle: Text('089990000'),
@@ -52,8 +52,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://o.remove.bg/downloads/6a42eb6f-5a6d-484f-92f8-bd0d1f6ac3b1/image-removebg-preview.png'),
+                    backgroundImage: AssetImage('assets/images1/boss2.jpg'),
                   ),
                   title: Text("Telegram"),
                   subtitle: Text('https://t.me/joinchat/oUOz_1MYw8MyMWM9'),
@@ -72,7 +71,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: AssetImage('assets/images1/boss1.jpgss'),
+                    backgroundImage: AssetImage('assets/images1/boss4.jpg'),
                   ),
                   title: Text("Email"),
                   subtitle: Text('sorsampisith@gmail.com'),
@@ -92,8 +91,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://o.remove.bg/downloads/1b49cb7d-2727-43d3-9c24-63c9201ee1f9/image-removebg-preview.png'),
+                    backgroundImage: AssetImage('assets/images1/boss3.jpg'),
                   ),
                   title: Text("FaceBook"),
                   subtitle: Text('ឱសថស្ថានយើង - Our Pharmacy'),

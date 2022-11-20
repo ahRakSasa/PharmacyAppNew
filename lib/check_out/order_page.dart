@@ -46,6 +46,7 @@ class _OrderPageState extends State<OrderPage> {
       });
     });
   }
+
   Future<void> updateUser() async {
     if (firstNameController.text.isEmpty ||
         lastNameController.text.isEmpty ||
@@ -80,21 +81,29 @@ class _OrderPageState extends State<OrderPage> {
     temDocsId = getDocsID();
     //updateUser();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 228, 228, 228),
+      backgroundColor: Colors.grey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         title: Text(
           'សង្ខេប',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+          size: 30,
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 20,
+            ),
             Container(
               height: 250,
               width: double.infinity,

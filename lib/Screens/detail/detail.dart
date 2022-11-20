@@ -23,13 +23,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       appBar: CustomAppBarPage(),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.green,
-        buttonBackgroundColor: Colors.white,
+        buttonBackgroundColor: Colors.green,
         backgroundColor: Colors.white,
         items: [
           InkWell(
             child: const Icon(
               Icons.share,
-              color: Colors.black,
+              color: Colors.white,
               size: 30,
             ),
             onTap: () {
@@ -48,6 +48,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             icon: const Icon(
               Icons.favorite,
               color: Colors.red,
+              size: 35,
             ),
           ),
           ElevatedButton(
@@ -60,7 +61,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               'បន្ថែមទៅកន្ត្រក',
               style: Theme.of(context)
                   .textTheme
-                  .bodyText1!
+                  .bodyLarge!
                   .copyWith(color: Colors.white),
             ),
           )
@@ -134,7 +135,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 60,
-                    color: Colors.black.withAlpha(50),
+                    color: Colors.green,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

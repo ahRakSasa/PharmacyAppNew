@@ -11,6 +11,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pharmacy_appnew_version/auth/otp/register.dart';
 import 'package:pharmacy_appnew_version/auth/otp/test_login.dart';
+import 'package:pharmacy_appnew_version/check_out/check_out.dart';
+import 'package:pharmacy_appnew_version/check_out/order_confimation.dart';
 import 'package:pharmacy_appnew_version/check_out/order_page.dart';
 import 'package:pharmacy_appnew_version/profile/edit_acc.dart';
 import 'package:pharmacy_appnew_version/setting/About_Us/home_screen_about.dart';

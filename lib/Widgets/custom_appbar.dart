@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/favourite/favourite_page.dart';
+import 'package:pharmacy_appnew_version/profile/edit_acc.dart';
 
 class CustomAppBarPage extends StatefulWidget with PreferredSizeWidget {
   const CustomAppBarPage({
@@ -32,17 +33,34 @@ class _CustomAppBarPageState extends State<CustomAppBarPage> {
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return FavouritePage();
-                },
-              ));
-            },
+            onPressed: () {},
             icon: Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ))
+              Icons.search,
+              color: Colors.grey,
+            )),
+        IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return FavouritePage();
+              },
+            ));
+          },
+          icon: Icon(
+            Icons.favorite,
+            color: Colors.red,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return ProfilePage();
+              },
+            ));
+          },
+          icon: Image(image: AssetImage('assets/images1/person_logo.png')),
+        ),
       ],
     );
   }

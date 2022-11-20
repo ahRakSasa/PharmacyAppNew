@@ -70,7 +70,7 @@ class _CustomNavigationBarPageState extends State<CustomNavigationBarPage> {
     ];
     return CurvedNavigationBar(
       color: Colors.green,
-      buttonBackgroundColor: Colors.white,
+      //buttonBackgroundColor: Colors.white,
       backgroundColor: Colors.white,
       items: items,
       index: index,

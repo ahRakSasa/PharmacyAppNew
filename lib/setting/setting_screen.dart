@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/Screens/home/home_screen.dart';
 import 'package:pharmacy_appnew_version/Screens/partner/partner.dart';
 import 'package:pharmacy_appnew_version/auth/otp/register.dart';
+import 'package:pharmacy_appnew_version/bottom/bottom_until.dart';
 import 'package:pharmacy_appnew_version/profile/edit_acc.dart';
 import 'package:pharmacy_appnew_version/setting/About_Us/home_screen_about.dart';
 import 'package:pharmacy_appnew_version/setting/contact/contact_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../Widgets/custom_navbar.dart';
+import '../bottom/custom_navbar.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -25,22 +26,23 @@ Future clearPrefer() async {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  int index = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 226, 226, 226),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         title: Text(
           'ការកំណត់',
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color: Colors.green,
+          color: Colors.white,
           size: 30,
         ),
       ),
-      //bottomNavigationBar: CustomNavigationBarPage(),
+      bottomNavigationBar: buildBottomNavigationBar(context, 1),
       body: SingleChildScrollView(
         child: Container(
           color: Color.fromARGB(255, 245, 245, 245),

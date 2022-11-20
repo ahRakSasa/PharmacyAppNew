@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmacy_appnew_version/models/partner/partner_model.dart';
 
-import '../../Widgets/custom_navbar.dart';
+import '../../bottom/custom_navbar.dart';
 
 class PartnerShipPage extends StatefulWidget {
   const PartnerShipPage({super.key});
@@ -48,11 +48,15 @@ class _PartnerShipPageState extends State<PartnerShipPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: const Center(
-          child: Text('សាខា'),
+        title: Text(
+          'ដៃគូរសហការណ៍',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+          size: 30,
         ),
       ),
-      bottomNavigationBar: CustomNavigationBarPage(),
       body: ListView.builder(
         itemCount: docsId.length,
         itemBuilder: (context, index) {
@@ -85,9 +89,8 @@ class _PartnerShipPageState extends State<PartnerShipPage> {
   }
 
   Widget buildViewProduct({Partners? partners}) {
-    return Container(
-      width: 200,
-      height: 350,
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
       child: Card(
         margin: const EdgeInsets.all(10),
         child: Column(

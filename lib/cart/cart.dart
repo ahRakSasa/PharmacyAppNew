@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_appnew_version/GetX/product/counter_product.dart';
 import 'package:pharmacy_appnew_version/GetX/product/product_controller.dart';
+import 'package:pharmacy_appnew_version/bottom/bottom_until.dart';
 import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 import 'package:pharmacy_appnew_version/models/user/products_order_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Widgets/custom_navbar.dart';
+import '../bottom/custom_navbar.dart';
 
 class MyCart extends StatefulWidget {
   const MyCart({super.key});
@@ -17,6 +18,7 @@ class MyCart extends StatefulWidget {
 }
 
 class _MyCartState extends State<MyCart> {
+  int index = 4;
   AddedProductController productController = Get.put(AddedProductController());
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _MyCartState extends State<MyCart> {
         title: const Text('កន្ត្រក'),
         backgroundColor: Colors.green,
       ),
-      bottomNavigationBar: CustomNavigationBarPage(),
+      bottomNavigationBar: buildBottomNavigationBar(context, 4),
       body: GetBuilder<AddedProductController>(builder: (value) {
         return SizedBox(
           height: 600,

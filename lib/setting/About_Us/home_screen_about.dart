@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy_appnew_version/bottom/bottom_until.dart';
 import 'package:pharmacy_appnew_version/setting/About_Us/about_detail.dart';
 import 'package:pharmacy_appnew_version/setting/About_Us/constant.dart';
 
@@ -13,22 +14,22 @@ class AboutUsHomePage extends StatefulWidget {
 }
 
 class _AboutUsHomePageState extends State<AboutUsHomePage> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'អំពីយើង',
-            style: TextStyle(color: Colors.green),
-          ),
+        backgroundColor: Colors.green,
+        title: Text(
+          'អំពីយើង',
+          style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color: Colors.green,
+          color: Colors.white,
           size: 30,
         ),
       ),
+      bottomNavigationBar: buildBottomNavigationBar(context, 0),
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(

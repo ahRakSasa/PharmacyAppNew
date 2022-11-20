@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy_appnew_version/bottom/bottom_until.dart';
 import 'package:pharmacy_appnew_version/models/branches/branch_model.dart';
 
-import '../../Widgets/custom_navbar.dart';
+import '../../bottom/custom_navbar.dart';
 
 class BranchScreen extends StatefulWidget {
   const BranchScreen({super.key});
@@ -13,6 +14,7 @@ class BranchScreen extends StatefulWidget {
 }
 
 class _BranchScreenState extends State<BranchScreen> {
+  int index = 3;
   List<String> docsId = [];
   Future<Branch?> getBranch(String docId) async {
     final docProduct =
@@ -48,19 +50,17 @@ class _BranchScreenState extends State<BranchScreen> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 226, 226, 226),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'សាខា',
-            style: TextStyle(color: Colors.green),
-          ),
+        backgroundColor: Colors.green,
+        title: Text(
+          'សាខា',
+          style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color: Colors.green,
+          color: Colors.white,
           size: 30,
         ),
       ),
-      //bottomNavigationBar: CustomNavigationBarPage(),
+      bottomNavigationBar: buildBottomNavigationBar(context, 3),
       body: ListView.builder(
         itemCount: docsId.length,
         itemBuilder: (context, index) {

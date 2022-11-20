@@ -87,15 +87,15 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF04B04F),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         title: Text(
           'គណនី',
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color: Colors.green,
+          color: Colors.white,
           size: 30,
         ),
       ),
@@ -109,6 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.only(top: 15),
                 child: Center(
                   child: CircleAvatar(
+                    backgroundColor: Colors.green,
                     backgroundImage: AssetImage('assets/images1/u_logo.jpg'),
                     radius: 80,
                   ),
@@ -129,17 +130,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   hintText: "គន្ធ",
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 122, 122, 122)),
+                  hintStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -162,17 +162,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   hintText: "រក្សា",
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 122, 122, 122)),
+                  hintStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -195,17 +194,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.place,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
                   hintText: "សៀមរាប",
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 122, 122, 122)),
+                  hintStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -231,14 +229,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.white,
                   ),
                   hintText: "raksakun628@gmail.com",
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 122, 122, 122)),
+                  hintStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -262,15 +259,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.phone,
-                    color: Colors.white,
+                    color: Colors.green,
                   ),
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.white),
+                    borderSide: BorderSide(width: 2, color: Colors.green),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -285,11 +282,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     'កែតម្រូវ',
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
+                    primary: Colors.green,
                     // side: BorderSide(color: Colors.yellow, width: 5),
                     textStyle: const TextStyle(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: 25,
                         fontStyle: FontStyle.normal),
                   ),
                   onPressed: () async {
