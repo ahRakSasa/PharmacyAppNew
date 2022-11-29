@@ -54,7 +54,7 @@ class _AllProductPageState extends State<AllProductPage> {
     return SizedBox(
         height: 700,
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, crossAxisSpacing: 4.0, mainAxisSpacing: 4.0),
           itemCount: docsId.length,
           itemBuilder: (context, index) {
@@ -160,14 +160,14 @@ class _AllProductPageState extends State<AllProductPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         IconButton(
                           onPressed: () {
                             widget.addProductController.addProducts(product!);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.shopping_cart_checkout_outlined,
                             color: Colors.white,
                           ),
@@ -177,7 +177,7 @@ class _AllProductPageState extends State<AllProductPage> {
                             widget.addFavouriteProductController
                                 .addFavouriteProducts(product!);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.favorite,
                             color: Colors.red,
                           ),

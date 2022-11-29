@@ -20,11 +20,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text(
+        title: const Text(
           'សង្ខេប',
           style: TextStyle(color: Colors.white),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
           size: 30,
         ),
@@ -44,7 +44,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             TextFormField(
               controller: firstNameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
@@ -53,7 +53,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             TextFormField(
               controller: lastNameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
@@ -62,7 +62,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             TextFormField(
               controller: addressController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
@@ -71,7 +71,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             TextFormField(
               controller: phoneController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
@@ -80,18 +80,18 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ),
             TextFormField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
                 hintText: 'អុីម៉ែល',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               height: 60,
               alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(color: Colors.green),
+              decoration: const BoxDecoration(color: Colors.green),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -109,7 +109,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
                     ),
@@ -117,7 +117,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             Text(
               'សង្ខេបនៃការបញ្ជាទិញ',
               style: Theme.of(context)
@@ -125,7 +125,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                   .headline5!
                   .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
             ),
-            OrderSummary()
+            const OrderSummary()
           ],
         ),
       ),

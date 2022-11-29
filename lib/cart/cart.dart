@@ -28,80 +28,73 @@ class _MyCartState extends State<MyCart> {
         backgroundColor: Colors.green,
       ),
       bottomNavigationBar: buildBottomNavigationBar(context, 4),
-      body: GetBuilder<AddedProductController>(builder: (value) {
-        return SizedBox(
-          height: 600,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 500,
-                child: ListView.builder(
-                  itemCount: value.listProducts.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(productController
-                              .listProducts[index].imageAsset[0]['url']
-                              .toString()),
-                        ),
-                        title: Text(productController.listProducts[index].name),
-                        subtitle:
-                            Text(productController.listProducts[index].price),
-                        trailing: SizedBox(
-                          width: 160,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.add_circle,
-                                    color: Colors.green,
-                                  )),
-                              Obx((() => Text('${productController.qty}'))),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.remove_circle,
-                                    color: Colors.green,
-                                  )),
-                              IconButton(
-                                  onPressed: () {
-                                    productController.removeProductController(
+      body: GetBuilder<AddedProductController>(
+          init: productController,
+          builder: (value) {
+            return SizedBox(
+              height: 600,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 500,
+                    child: ListView.builder(
+                      itemCount: productController.listProducts.length,
+                      itemBuilder: (context, index) {
+                        var pro = productController.listProducts[index];
+                        var qty = productController.listQty[index];
+                        return Card(
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  pro.imageAsset[0]['url'].toString()),
+                            ),
+                            title: Text(pro.name),
+                            subtitle: Text(pro.price),
+                            trailing: SizedBox(
+                              width: 160,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        productController.decrementQty(index);
+                                      },
+                                      icon: const Icon(
+                                        Icons.remove_circle,
+                                        color: Colors.green,
+                                      )),
+                                  Text('$qty'),
+                                  IconButton(
+                                      onPressed: () {
+                                        productController.incrementQty(index);
+                                      },
+                                      icon: const Icon(
+                                        Icons.add_circle,
+                                        color: Colors.green,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
                                         productController
-                                            .listProducts[index].name);
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.black,
-                                  )),
-                            ],
+                                            .removeProductController(
+                                                productController
+                                                    .listProducts[index].name);
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.black,
+                                      )),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.black, // Background color
-                  onPrimary: Colors.green, // Text Color (Foreground color)
-                ),
-                child: Text(
-                  'ធ្វើការកម្មង',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.white),
-                ),
-              )
-            ],
-          ),
-        );
-      }),
+            );
+          }),
     );
   }
 }

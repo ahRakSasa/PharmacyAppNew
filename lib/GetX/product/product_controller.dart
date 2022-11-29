@@ -3,15 +3,45 @@ import 'package:pharmacy_appnew_version/models/products/product_model.dart';
 
 class AddedProductController extends GetxController {
   List<Products> listProducts = <Products>[].obs();
-  var qty = 0.obs;
+  List<int> listQty = <int>[].obs();
+  // List<double> listTotal = <double>[].obs();
 
   void addProducts(Products products) async {
-    listProducts.add(products);
-    qty++;
-    update();
+    if (listProducts == []) {
+      listProducts.add(products);
+      listQty.add(1);
+      Get.snackbar("បានបន្ថែមទៅក្នុងកន្ត្រកជោគជ័យ", "អ្នកបានដាក់",
+          snackPosition: SnackPosition.TOP, duration: Duration(seconds: 2));
+    } else {
+      if (listProducts.every((element) =>
+          element.name.toLowerCase() != products.name.toLowerCase())) {
+        listProducts.add(products);
+        listQty.add(1);
+        Get.snackbar("បានបន្ថែមទៅក្នុងកន្ត្រកជោគជ័យ", "អ្នកបានដាក់",
+            snackPosition: SnackPosition.TOP, duration: Duration(seconds: 1));
+      } else {
+        Get.snackbar("មានក្នុងកន្រ្តករួចហើយ", "អ្នកបានដាក់",
+            snackPosition: SnackPosition.TOP, duration: Duration(seconds: 1));
+      }
+    }
 
-    Get.snackbar("បានបន្ថែមទៅក្នុងកន្ត្រកជោគជ័យ", "អ្នកបានដាក់",
-        snackPosition: SnackPosition.TOP, duration: Duration(seconds: 2));
+    update();
+  }
+
+  incrementQty(int index, {int qty = 1}) {
+    listQty[index] += qty;
+
+    update();
+    print(listQty[index]);
+  }
+
+  decrementQty(int index, {int qty = 1}) {
+    if (listQty[index] <= 1) {
+      listQty[index] = 1;
+    } else {
+      listQty[index] -= qty;
+    }
+    update();
   }
 
   removeProductController(String productName) {
